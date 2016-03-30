@@ -1,0 +1,7 @@
+{
+    "name": "azure-c-shared-utility",
+    "author": "Dan Cristoloveanu",
+    "license": "MIT",
+    "version": "0.0.1",
+    "description": "Azure C shared utility"
+}
