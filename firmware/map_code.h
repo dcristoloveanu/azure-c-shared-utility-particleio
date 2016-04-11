@@ -5,8 +5,8 @@
 #ifdef _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #endif
-#include "gballoc.h"
 
+#include "gballoc.h"
 #include "map.h"
 #include "iot_logging.h"
 #include "strings.h"

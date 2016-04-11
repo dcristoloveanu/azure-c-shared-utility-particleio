@@ -11,8 +11,6 @@
 #include "hmac.h"
 #include "strings.h"
 
-
-
 HMACSHA256_RESULT HMACSHA256_ComputeHash(const unsigned char* key, size_t keyLen, const unsigned char* payload, size_t payloadLen, BUFFER_HANDLE hash)
 {
     HMACSHA256_RESULT result;

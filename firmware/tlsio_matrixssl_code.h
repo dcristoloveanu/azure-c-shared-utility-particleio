@@ -12,7 +12,8 @@
 #include "tlsio.h"
 #include "tlsio_matrixssl.h"
 #include "socketio.h"
-#include "matrixsslapi.h"
+
+#include "httpsclient-particle/matrixsslApi.h"
 
 typedef enum TLSIO_STATE_ENUM_TAG
 {
@@ -132,7 +133,7 @@ static void on_underlying_io_bytes_received(void* context, const unsigned char* 
                 {
                     if (receive_result == MATRIXSSL_HANDSHAKE_COMPLETE)
                     {
-                        printf("Handshake done\r\n");
+                        //printf("Handshake done\r\n");
 
                         /* indicate open complete */
                         tls_io_instance->tlsio_state = TLSIO_STATE_OPEN;
@@ -141,7 +142,7 @@ static void on_underlying_io_bytes_received(void* context, const unsigned char* 
 
                     if (decoded_bytes_length > 0)
                     {
-                        printf("Decoded %d bytes app data\r\n", (int)decoded_bytes_length);
+                        //printf("Decoded %d bytes app data\r\n", (int)decoded_bytes_length);
 
                         /* indicate bytes up */
                         if (tls_io_instance->on_bytes_received != NULL)
@@ -410,6 +411,7 @@ int tlsio_matrixssl_open(CONCRETE_IO_HANDLE tls_io, ON_IO_OPEN_COMPLETE on_io_op
                         }
                         else
                         {
+                            int ret_code;
                             sslSessOpts_t session_options;
 
                             session_options.bufferPool = NULL;
@@ -419,9 +421,10 @@ int tlsio_matrixssl_open(CONCRETE_IO_HANDLE tls_io, ON_IO_OPEN_COMPLETE on_io_op
                             session_options.truncHmac = 0;
                             session_options.userPtr = tls_io_instance;
                             session_options.versionFlag = SSL_FLAGS_TLS_1_2;
+                            ret_code = matrixSslNewClientSession(&tls_io_instance->ssl, tls_io_instance->keys, NULL, NULL, 0, cert_validator_callback,
+                                NULL, extension, extension_callback, &session_options);
 
-                            if (matrixSslNewClientSession(&tls_io_instance->ssl, tls_io_instance->keys, NULL, NULL, 0, cert_validator_callback,
-                                NULL, extension, extension_callback, &session_options) < 0)
+                            if (ret_code < 0)
                             {
                                 result = __LINE__;
                             }
@@ -556,7 +559,6 @@ int tlsio_matrixssl_send(CONCRETE_IO_HANDLE tls_io, const void* buffer, size_t s
                             }
                             else
                             {
-                                printf("Send %d encoded bytes\r\n", (int)out_data_length);
                             }
                         }
                     }
@@ -592,7 +594,7 @@ void tlsio_matrixssl_dowork(CONCRETE_IO_HANDLE tls_io)
                 }
                 else
                 {
-                    printf("Send %d bytes\r\n", (int)out_data_length);
+                    //printf("Send %d bytes\r\n", (int)out_data_length);
                 }
             }
         }

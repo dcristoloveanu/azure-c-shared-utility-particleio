@@ -1,7 +1,7 @@
 {
-    "name": "azure-c-shared-utility",
-    "author": "Dan Cristoloveanu",
+    "name": "azure_c_shared_utility",
+    "author": "Microsoft",
     "license": "MIT",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Azure C shared utility"
 }

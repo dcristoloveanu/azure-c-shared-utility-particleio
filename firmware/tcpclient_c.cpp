@@ -5,6 +5,12 @@
 #include "application.h"
 #include "tcpclient_c.h"
 
+void log_serial(char* logline)
+{
+Serial.printf(logline);
+Serial.printf("\r\n");
+}
+
 TCPCLIENT_HANDLE tcpclient_create(void)
 {
     return new TCPClient();
@@ -27,7 +33,7 @@ size_t tcpclient_write(TCPCLIENT_HANDLE tcp_client, const uint8_t *buffer, size_
 
 int tcpclient_read(TCPCLIENT_HANDLE tcp_client, uint8_t *buffer, size_t size)
 {
-    return ((TCPClient*)tcp_client)->write(buffer, size);
+    return ((TCPClient*)tcp_client)->read(buffer, size);
 }
 
 int tcpclient_available(TCPCLIENT_HANDLE tcp_client)

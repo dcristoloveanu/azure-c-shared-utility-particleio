@@ -18,6 +18,8 @@ static const int avoid_a_warning_C4206 = 0; /* warning C4206: nonstandard extens
 #include <stdarg.h>
 #endif
 
+#include "gb_stdio.h"
+
 /*this is fopen*/
 FILE *gb_fopen(const char * filename, const char * mode)
 {
