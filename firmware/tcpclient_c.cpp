@@ -5,12 +5,6 @@
 #include "application.h"
 #include "tcpclient_c.h"
 
-void log_serial(char* logline)
-{
-Serial.printf(logline);
-Serial.printf("\r\n");
-}
-
 TCPCLIENT_HANDLE tcpclient_create(void)
 {
     return new TCPClient();

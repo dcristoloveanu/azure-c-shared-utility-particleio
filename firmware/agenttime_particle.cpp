@@ -11,8 +11,6 @@
 #include <time.h>
 #include "azure_c_shared_utility/agenttime.h"
 
-extern void log_serial(char* logling);
-
 time_t get_time(time_t* p)
 {
   struct tm my_time;
@@ -26,9 +24,6 @@ time_t get_time(time_t* p)
   my_time.tm_mday = Time.day();
   my_time.tm_year = Time.year() - 1900;
 
-//  sprintf(temp_buffer, "%d/%d/%d %d:%d:%d", (int)my_time.tm_mon, (int)my_time.tm_mday, (int)my_time.tm_year, (int)my_time.tm_hour, (int)my_time.tm_min, (int)my_time.tm_sec);
-//  log_serial(temp_buffer);
-  
   result = mktime(&my_time);
   if (p != NULL)
   {
